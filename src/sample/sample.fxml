@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <TabPane prefHeight="637.0" prefWidth="925.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabGroups" onSelectionChanged="#loadGroups" text="Группы">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="602.0" prefWidth="891.0">
+                     <children>
+                        <TableView fx:id="tableGroups" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="286.0" prefWidth="354.0" AnchorPane.bottomAnchor="272.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                          <columns>
+                            <TableColumn fx:id="tableGroupsColumn" prefWidth="904.0" text="Группа" />
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="addGroupTf" layoutX="10.0" layoutY="351.0" AnchorPane.leftAnchor="10.0" />
+                        <Button fx:id="addGroupBut" layoutX="172.0" layoutY="351.0" mnemonicParsing="false" onAction="#addGroup" text="Добавить" />
+                        <Button fx:id="deleteGroupBut" layoutX="251.0" layoutY="351.0" mnemonicParsing="false" onAction="#delGroup" text="Удалить" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Студенты">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</GridPane>
