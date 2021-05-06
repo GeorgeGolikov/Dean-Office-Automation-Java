@@ -112,7 +112,7 @@ public class Controller {
             groupService.delete(group);
         }
         loadGroups();
-
+        
         loadMarksComboBoxes();
         loadAverageComboBoxes();
     }
@@ -225,7 +225,7 @@ public class Controller {
 
         studentService.add(new Student(name, lastName, fatherName, group));
         loadStudents();
-
+        
         loadMarksComboBoxes();
         loadAverageComboBoxes();
     }
@@ -236,7 +236,7 @@ public class Controller {
             studentService.delete(student);
         }
         loadStudents();
-
+        
         loadMarksComboBoxes();
         loadAverageComboBoxes();
     }
@@ -335,7 +335,7 @@ public class Controller {
 
         teacherService.add(new Teacher(name, lastName, fatherName));
         loadTeachers();
-
+        
         loadMarksComboBoxes();
         loadAverageComboBoxes();
     }
@@ -346,7 +346,7 @@ public class Controller {
             teacherService.delete(teacher);
         }
         loadTeachers();
-
+        
         loadMarksComboBoxes();
         loadAverageComboBoxes();
     }
@@ -409,7 +409,7 @@ public class Controller {
 
         subjectService.add(new Subject(name));
         loadSubjects();
-
+        
         loadMarksComboBoxes();
         loadAverageComboBoxes();
     }
@@ -420,7 +420,7 @@ public class Controller {
             subjectService.delete(subject);
         }
         loadSubjects();
-
+        
         loadMarksComboBoxes();
         loadAverageComboBoxes();
     }
@@ -591,7 +591,7 @@ public class Controller {
 
     @FXML
     private Button filterCalcBut;
-
+    
     private String selectedFilter;
 
     public void filterSelected() {

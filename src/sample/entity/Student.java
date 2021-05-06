@@ -65,4 +65,9 @@ public final class Student {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }

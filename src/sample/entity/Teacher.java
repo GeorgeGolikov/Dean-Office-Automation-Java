@@ -54,4 +54,9 @@ public final class Teacher {
     public void setFatherName(String fatherName) {
         this.fatherName = fatherName;
     }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }

@@ -18,6 +18,7 @@ public class AverageMarkDao extends DAO<Double> {
             return getAverageMarkStudAndTeach(start, end, studentId, cstmt);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
             return null;
         }
     }
@@ -32,19 +33,18 @@ public class AverageMarkDao extends DAO<Double> {
     }
 
     private String getAverageMarkStudAndTeach(String start, String end, Integer id,
-                             CallableStatement cstmt) throws SQLException {
+                                              CallableStatement cstmt) throws SQLException {
         cstmt.setString(1, start);
         cstmt.setString(2, end);
         cstmt.setInt(3, id);
         cstmt.registerOutParameter(4, Types.REF_CURSOR);
         cstmt.executeQuery();
 
-        try (ResultSet rs = cstmt.getObject(1, ResultSet.class)) {
-            if (rs.next()) {
-                return rs.getString(1);
-            }
-            return null;
+        ResultSet rs = cstmt.getObject(4, ResultSet.class);
+        if (rs.next()) {
+            return String.valueOf(rs.getFloat(1));
         }
+        return null;
     }
 
     public String calcPerfGroup(String start, String end, String groupName) {
@@ -73,12 +73,11 @@ public class AverageMarkDao extends DAO<Double> {
         cstmt.registerOutParameter(4, Types.REF_CURSOR);
         cstmt.executeQuery();
 
-        try (ResultSet rs = cstmt.getObject(1, ResultSet.class)) {
-            if (rs.next()) {
-                return rs.getString(1);
-            }
-            return null;
+        ResultSet rs = cstmt.getObject(4, ResultSet.class);
+        if (rs.next()) {
+            return String.valueOf(rs.getFloat(1));
         }
+        return null;
     }
 
     @Override

@@ -27,7 +27,7 @@ public class MarkDao extends DAO<Mark> {
             cstmt.registerOutParameter(2, Types.REF_CURSOR);
             cstmt.executeQuery();
 
-            try (ResultSet rs = cstmt.getObject(1, ResultSet.class)) {
+            try (ResultSet rs = cstmt.getObject(2, ResultSet.class)) {
                 ObservableList<Mark> res = FXCollections.observableArrayList();
                 while(rs.next()) {
                     res.add(new Mark(
