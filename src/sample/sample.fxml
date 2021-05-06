@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.Controller">
    <columnConstraints>
@@ -21,20 +22,20 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <TabPane prefHeight="637.0" prefWidth="925.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="900.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="tabGroups" onSelectionChanged="#loadGroups" text="Группы">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="602.0" prefWidth="891.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="984.0">
                      <children>
-                        <TableView fx:id="tableGroups" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="286.0" prefWidth="354.0" AnchorPane.bottomAnchor="272.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <TableView fx:id="tableGroups" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                           <columns>
-                            <TableColumn fx:id="tableGroupsColumn" prefWidth="904.0" text="Группа" />
+                            <TableColumn fx:id="tableGroupsColumn" prefWidth="1179.0" text="Группа" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="addGroupTf" layoutX="10.0" layoutY="351.0" promptText="Группа" AnchorPane.leftAnchor="10.0" />
-                        <Button fx:id="addGroupBut" layoutX="172.0" layoutY="351.0" mnemonicParsing="false" onAction="#addGroup" text="Добавить" />
-                        <Button fx:id="deleteGroupBut" layoutX="251.0" layoutY="351.0" mnemonicParsing="false" onAction="#delGroup" text="Удалить" />
+                        <TextField fx:id="addGroupTf" layoutX="10.0" layoutY="604.0" promptText="Группа" AnchorPane.bottomAnchor="242.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="1041.0" />
+                        <Button fx:id="addGroupBut" layoutX="176.0" layoutY="604.0" mnemonicParsing="false" onAction="#addGroup" text="Добавить" AnchorPane.bottomAnchor="242.0" />
+                        <Button fx:id="deleteGroupBut" layoutX="264.0" layoutY="604.0" mnemonicParsing="false" onAction="#delGroup" prefHeight="25.0" prefWidth="69.0" text="Удалить" AnchorPane.bottomAnchor="242.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -43,20 +44,20 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableStudents" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <TableView fx:id="tableStudents" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                           <columns>
-                            <TableColumn fx:id="tableStudentsLastNameColumn" prefWidth="168.0" text="Фамилия" />
-                            <TableColumn fx:id="tableStudentsNameColumn" prefWidth="147.0" text="Имя" />
-                              <TableColumn fx:id="tableStudentsFatherNameColumn" prefWidth="148.0" text="Отчество" />
-                              <TableColumn fx:id="tableStudentsGroupColumn" prefWidth="153.0" text="Группа" />
+                            <TableColumn fx:id="tableStudentsLastNameColumn" prefWidth="300.0" text="Фамилия" />
+                            <TableColumn fx:id="tableStudentsNameColumn" prefWidth="300.0" text="Имя" />
+                              <TableColumn fx:id="tableStudentsFatherNameColumn" prefWidth="300.0" text="Отчество" />
+                              <TableColumn fx:id="tableStudentsGroupColumn" prefWidth="300.0" text="Группа" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="addStudentLastNameTf" layoutX="10.0" layoutY="419.0" promptText="Фамилия" />
-                        <TextField fx:id="addStudentNameTf" layoutX="177.0" layoutY="419.0" promptText="Имя" />
-                        <TextField fx:id="addStudentFatherNameTf" layoutX="340.0" layoutY="419.0" promptText="Отчество" />
-                        <TextField fx:id="addStudentGroupTf" layoutX="500.0" layoutY="419.0" promptText="Группа" />
-                        <Button fx:id="addStudentBut" layoutX="665.0" layoutY="419.0" mnemonicParsing="false" onAction="#addStudent" text="Добавить" />
-                        <Button fx:id="deleteStudentBut" layoutX="752.0" layoutY="419.0" mnemonicParsing="false" onAction="#delStudent" text="Удалить" />
+                        <TextField fx:id="addStudentLastNameTf" layoutX="10.0" layoutY="599.0" promptText="Фамилия" AnchorPane.bottomAnchor="242.0" />
+                        <TextField fx:id="addStudentNameTf" layoutX="172.0" layoutY="599.0" promptText="Имя" AnchorPane.bottomAnchor="242.0" />
+                        <TextField fx:id="addStudentFatherNameTf" layoutX="335.0" layoutY="599.0" promptText="Отчество" AnchorPane.bottomAnchor="242.0" />
+                        <TextField fx:id="addStudentGroupTf" layoutX="497.0" layoutY="599.0" promptText="Группа" AnchorPane.bottomAnchor="242.0" />
+                        <Button fx:id="addStudentBut" layoutX="660.0" layoutY="599.0" mnemonicParsing="false" onAction="#addStudent" text="Добавить" AnchorPane.bottomAnchor="242.0" />
+                        <Button fx:id="deleteStudentBut" layoutX="744.0" layoutY="599.0" mnemonicParsing="false" onAction="#delStudent" prefHeight="25.0" prefWidth="69.0" text="Удалить" AnchorPane.bottomAnchor="242.0" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -64,18 +65,18 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tableTeachers" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <TableView fx:id="tableTeachers" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <columns>
-                              <TableColumn fx:id="tableTeachersLastNameColumn" prefWidth="168.0" text="Фамилия" />
-                              <TableColumn fx:id="tableTeachersNameColumn" prefWidth="147.0" text="Имя" />
-                              <TableColumn fx:id="tableTeachersFatherNameColumn" prefWidth="148.0" text="Отчество" />
+                              <TableColumn fx:id="tableTeachersLastNameColumn" prefWidth="400.0" text="Фамилия" />
+                              <TableColumn fx:id="tableTeachersNameColumn" prefWidth="400.0" text="Имя" />
+                              <TableColumn fx:id="tableTeachersFatherNameColumn" prefWidth="400.0" text="Отчество" />
                            </columns>
                         </TableView>
-                        <TextField fx:id="addTeacherLastNameTf" layoutX="10.0" layoutY="419.0" promptText="Фамилия" />
-                        <TextField fx:id="addTeacherNameTf" layoutX="177.0" layoutY="419.0" promptText="Имя" />
-                        <TextField fx:id="addTeacherFatherNameTf" layoutX="340.0" layoutY="419.0" promptText="Отчество" />
-                        <Button fx:id="addTeacherBut" layoutX="506.0" layoutY="419.0" mnemonicParsing="false" onAction="#addTeacher" text="Добавить" />
-                        <Button fx:id="deleteTeacherBut" layoutX="593.0" layoutY="419.0" mnemonicParsing="false" onAction="#delTeacher" text="Удалить" />
+                        <TextField fx:id="addTeacherLastNameTf" layoutX="10.0" layoutY="601.0" promptText="Фамилия" AnchorPane.bottomAnchor="242.0" />
+                        <TextField fx:id="addTeacherNameTf" layoutX="177.0" layoutY="601.0" promptText="Имя" AnchorPane.bottomAnchor="242.0" />
+                        <TextField fx:id="addTeacherFatherNameTf" layoutX="340.0" layoutY="601.0" promptText="Отчество" AnchorPane.bottomAnchor="242.0" />
+                        <Button fx:id="addTeacherBut" layoutX="506.0" layoutY="601.0" mnemonicParsing="false" onAction="#addTeacher" text="Добавить" AnchorPane.bottomAnchor="242.0" />
+                        <Button fx:id="deleteTeacherBut" layoutX="589.0" layoutY="604.0" mnemonicParsing="false" onAction="#delTeacher" prefHeight="25.0" prefWidth="69.0" text="Удалить" AnchorPane.bottomAnchor="242.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -84,14 +85,14 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="602.0" prefWidth="891.0">
                      <children>
-                        <TableView fx:id="tableSubjects" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="286.0" prefWidth="354.0" AnchorPane.bottomAnchor="272.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                        <TableView fx:id="tableSubjects" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                            <columns>
-                              <TableColumn fx:id="tableSubjectsColumn" prefWidth="904.0" text="Предмет" />
+                              <TableColumn fx:id="tableSubjectsColumn" prefWidth="1179.0" text="Предмет" />
                            </columns>
                         </TableView>
-                        <TextField fx:id="addSubjectTf" layoutX="10.0" layoutY="351.0" promptText="Предмет" AnchorPane.leftAnchor="10.0" />
-                        <Button fx:id="addSubjectBut" layoutX="172.0" layoutY="351.0" mnemonicParsing="false" onAction="#addSubject" text="Добавить" />
-                        <Button fx:id="deleteSubjectBut" layoutX="251.0" layoutY="351.0" mnemonicParsing="false" onAction="#delSubject" text="Удалить" />
+                        <TextField fx:id="addSubjectTf" layoutX="10.0" layoutY="594.0" promptText="Предмет" AnchorPane.bottomAnchor="242.0" AnchorPane.leftAnchor="10.0" />
+                        <Button fx:id="addSubjectBut" layoutX="174.0" layoutY="594.0" mnemonicParsing="false" onAction="#addSubject" text="Добавить" AnchorPane.bottomAnchor="242.0" />
+                        <Button fx:id="deleteSubjectBut" layoutX="258.0" layoutY="594.0" mnemonicParsing="false" onAction="#delSubject" prefHeight="25.0" prefWidth="69.0" text="Удалить" AnchorPane.bottomAnchor="242.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -101,19 +102,19 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <ComboBox fx:id="marksStudentsCombo" layoutX="10.0" layoutY="14.0" onAction="#loadMarks" prefWidth="150.0" promptText="Студент" />
-                        <TableView fx:id="tableMarks" editable="true" layoutX="14.0" layoutY="51.0" prefHeight="324.0" prefWidth="648.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+                        <TableView fx:id="tableMarks" editable="true" layoutX="14.0" layoutY="51.0" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
                           <columns>
-                            <TableColumn fx:id="tableMarkSubjectColumn" editable="false" prefWidth="179.0" text="Предмет" />
-                            <TableColumn fx:id="tableMarkTeacherNameColumn" editable="false" prefWidth="135.0" text="Преп.Имя" />
-                              <TableColumn fx:id="tableMarkTeacherLastNameColumn" editable="false" prefWidth="155.0" text="Преп.Фамилия" />
-                              <TableColumn fx:id="tableMarkValueColumn" prefWidth="200.0" text="Оценка" />
+                            <TableColumn fx:id="tableMarkSubjectColumn" editable="false" prefWidth="300.0" text="Предмет" />
+                            <TableColumn fx:id="tableMarkTeacherNameColumn" editable="false" prefWidth="300.0" text="Преп.Имя" />
+                              <TableColumn fx:id="tableMarkTeacherLastNameColumn" editable="false" prefWidth="300.0" text="Преп.Фамилия" />
+                              <TableColumn fx:id="tableMarkValueColumn" prefWidth="300.0" text="Оценка" />
                           </columns>
                         </TableView>
-                        <ComboBox fx:id="marksSubjectsCombo" layoutX="10.0" layoutY="421.0" prefWidth="150.0" promptText="Предмет" />
-                        <ComboBox fx:id="marksTeachersCombo" layoutX="170.0" layoutY="421.0" prefWidth="150.0" promptText="Преподаватель" />
-                        <ComboBox fx:id="marksValueCombo" layoutX="336.0" layoutY="421.0" prefWidth="150.0" promptText="Оценка" />
-                        <Button fx:id="addMarkBut" layoutX="515.0" layoutY="421.0" mnemonicParsing="false" onAction="#addMark" text="Добавить" />
-                        <Button fx:id="deleteMarkBut" layoutX="593.0" layoutY="421.0" mnemonicParsing="false" onAction="#delMark" text="Удалить" />
+                        <ComboBox fx:id="marksSubjectsCombo" layoutX="10.0" layoutY="596.0" prefWidth="150.0" promptText="Предмет" AnchorPane.bottomAnchor="242.0" />
+                        <ComboBox fx:id="marksTeachersCombo" layoutX="175.0" layoutY="596.0" prefWidth="150.0" promptText="Преподаватель" AnchorPane.bottomAnchor="242.0" />
+                        <ComboBox fx:id="marksValueCombo" layoutX="341.0" layoutY="596.0" prefWidth="150.0" promptText="Оценка" AnchorPane.bottomAnchor="242.0" />
+                        <Button fx:id="addMarkBut" layoutX="515.0" layoutY="596.0" mnemonicParsing="false" onAction="#addMark" text="Добавить" AnchorPane.bottomAnchor="242.0" />
+                        <Button fx:id="deleteMarkBut" layoutX="600.0" layoutY="596.0" mnemonicParsing="false" onAction="#delMark" prefHeight="25.0" prefWidth="69.0" text="Удалить" AnchorPane.bottomAnchor="242.0" />
                      </children>
                   </AnchorPane>
               </content>
@@ -122,15 +123,19 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ComboBox fx:id="filterCombo" layoutX="70.0" layoutY="60.0" onAction="#filterSelected" prefWidth="150.0" promptText="Фильтр" />
-                        <Button fx:id="filterCalcBut" disable="true" layoutX="70.0" layoutY="324.0" mnemonicParsing="false" onAction="#calculatePerformance" text="Найти" />
-                        <TextField fx:id="filterAverageTf" editable="false" layoutX="70.0" layoutY="198.0" prefHeight="106.0" prefWidth="159.0" promptText="Средний балл" />
-                        <DatePicker fx:id="filterStartDate" layoutX="70.0" layoutY="97.0" prefHeight="25.0" prefWidth="138.0" promptText="начало периода" />
-                        <DatePicker fx:id="filterEndDate" layoutX="70.0" layoutY="136.0" prefHeight="25.0" prefWidth="138.0" promptText="конец периода" />
-                        <ComboBox fx:id="filterStudCombo" disable="true" layoutX="254.0" layoutY="60.0" prefWidth="150.0" promptText="Студенты" />
-                        <ComboBox fx:id="filterTeacherCombo" disable="true" layoutX="412.0" layoutY="60.0" prefWidth="150.0" promptText="Преподаватели" />
-                        <ComboBox fx:id="filterSubjCombo" disable="true" layoutX="573.0" layoutY="60.0" prefWidth="150.0" promptText="Предметы" />
-                        <ComboBox fx:id="filterGroupCombo" disable="true" layoutX="737.0" layoutY="60.0" prefWidth="150.0" promptText="Группы" />
+                        <ComboBox fx:id="filterCombo" layoutX="351.0" layoutY="70.0" onAction="#filterSelected" prefWidth="150.0" promptText="Фильтр" />
+                        <Button fx:id="filterCalcBut" disable="true" layoutX="777.0" layoutY="140.0" mnemonicParsing="false" onAction="#calculatePerformance" prefHeight="65.0" prefWidth="73.0" text="Найти" />
+                        <TextField fx:id="filterAverageTf" alignment="CENTER" editable="false" layoutX="447.0" layoutY="394.0" prefHeight="205.0" prefWidth="307.0" promptText="Средний балл">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </TextField>
+                        <DatePicker fx:id="filterStartDate" layoutX="578.0" layoutY="140.0" prefHeight="25.0" prefWidth="138.0" promptText="начало периода" />
+                        <DatePicker fx:id="filterEndDate" layoutX="578.0" layoutY="179.0" prefHeight="25.0" prefWidth="138.0" promptText="конец периода" />
+                        <ComboBox fx:id="filterStudCombo" disable="true" layoutX="351.0" layoutY="138.0" prefWidth="150.0" promptText="Студенты" />
+                        <ComboBox fx:id="filterTeacherCombo" disable="true" layoutX="351.0" layoutY="172.0" prefWidth="150.0" promptText="Преподаватели" />
+                        <ComboBox fx:id="filterSubjCombo" disable="true" layoutX="351.0" layoutY="207.0" prefWidth="150.0" promptText="Предметы" />
+                        <ComboBox fx:id="filterGroupCombo" disable="true" layoutX="351.0" layoutY="245.0" prefWidth="150.0" promptText="Группы" />
                      </children>
                   </AnchorPane>
               </content>
