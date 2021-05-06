@@ -15,6 +15,7 @@ import sample.service.*;
 import sample.service.impl.*;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class Controller {
     private static GroupService groupService;
@@ -22,6 +23,7 @@ public class Controller {
     private static TeacherService teacherService;
     private static SubjectService subjectService;
     private static MarkService markService;
+    private static AverageMarkService averageMarkService;
 
     static {
         try {
@@ -30,6 +32,7 @@ public class Controller {
             teacherService = new TeacherServiceImpl(new TeacherDao());
             subjectService = new SubjectServiceImpl(new SubjectDao());
             markService = new MarkServiceImpl(new MarkDao());
+            averageMarkService = new AverageMarkServiceImpl(new AverageMarkDao());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -43,6 +46,7 @@ public class Controller {
         initTeachers();
         initSubjects();
         initMarks();
+        initAverage();
     }
 
     private void initData() {
@@ -98,6 +102,8 @@ public class Controller {
 
         groupService.add(new Group(name));
         loadGroups();
+
+        loadAverageComboBoxes();
     }
 
     public void delGroup() {
@@ -106,7 +112,9 @@ public class Controller {
             groupService.delete(group);
         }
         loadGroups();
+
         loadMarksComboBoxes();
+        loadAverageComboBoxes();
     }
 
     public void editGroup(Group group, String newGroupName) {
@@ -114,6 +122,8 @@ public class Controller {
 
         groupService.update(group, new Group(newGroupName));
         group.setName(newGroupName);
+
+        loadAverageComboBoxes();
     }
 
     /*
@@ -215,7 +225,9 @@ public class Controller {
 
         studentService.add(new Student(name, lastName, fatherName, group));
         loadStudents();
+
         loadMarksComboBoxes();
+        loadAverageComboBoxes();
     }
 
     public void delStudent() {
@@ -224,7 +236,9 @@ public class Controller {
             studentService.delete(student);
         }
         loadStudents();
+
         loadMarksComboBoxes();
+        loadAverageComboBoxes();
     }
 
     public void editStudent(Student student, String lastName, String name,
@@ -239,6 +253,7 @@ public class Controller {
         student.setGroupName(group);
 
         loadMarksComboBoxes();
+        loadAverageComboBoxes();
     }
 
     /*
@@ -320,7 +335,9 @@ public class Controller {
 
         teacherService.add(new Teacher(name, lastName, fatherName));
         loadTeachers();
+
         loadMarksComboBoxes();
+        loadAverageComboBoxes();
     }
 
     public void delTeacher() {
@@ -329,7 +346,9 @@ public class Controller {
             teacherService.delete(teacher);
         }
         loadTeachers();
+
         loadMarksComboBoxes();
+        loadAverageComboBoxes();
     }
 
     public void editTeacher(Teacher teacher, String lastName, String name, String fatherName) {
@@ -341,6 +360,7 @@ public class Controller {
         teacher.setFatherName(fatherName);
 
         loadMarksComboBoxes();
+        loadAverageComboBoxes();
     }
 
     /*
@@ -389,7 +409,9 @@ public class Controller {
 
         subjectService.add(new Subject(name));
         loadSubjects();
+
         loadMarksComboBoxes();
+        loadAverageComboBoxes();
     }
 
     public void delSubject() {
@@ -398,7 +420,9 @@ public class Controller {
             subjectService.delete(subject);
         }
         loadSubjects();
+
         loadMarksComboBoxes();
+        loadAverageComboBoxes();
     }
 
     public void editSubject(Subject subject, String newSubjectName) {
@@ -408,6 +432,7 @@ public class Controller {
         subject.setName(newSubjectName);
 
         loadMarksComboBoxes();
+        loadAverageComboBoxes();
     }
 
     /*
@@ -514,5 +539,117 @@ public class Controller {
         markService.update(mark, new Mark(mark.getStudentId(), mark.getSubjectName(),
                 mark.getTeacherId(), newValue));
         mark.setValue(newValue);
+    }
+
+    /*
+        -------------------------------------------- СРЕДНИЙ БАЛЛ --------------------------------------------
+    */
+    private void initAverage() {
+        filterStudCombo.setOnAction(e -> filterCalcBut.setDisable(false));
+        filterTeacherCombo.setOnAction(e -> filterCalcBut.setDisable(false));
+        filterSubjCombo.setOnAction(e -> filterCalcBut.setDisable(false));
+        filterGroupCombo.setOnAction(e -> filterCalcBut.setDisable(false));
+
+        loadAverageComboBoxes();
+        filterCombo.setItems(FXCollections.observableArrayList("Студенты", "Преподаватели",
+                                                                "Предметы", "Группы"));
+    }
+
+    private void loadAverageComboBoxes() {
+        filterStudCombo.setItems(students);
+        filterTeacherCombo.setItems(teachers);
+        filterSubjCombo.setItems(subjects);
+        filterGroupCombo.setItems(groups);
+    }
+
+    @FXML
+    private Tab tabAverage;
+
+    @FXML
+    private ComboBox<String> filterCombo;
+
+    @FXML
+    private ComboBox<Student> filterStudCombo;
+
+    @FXML
+    private ComboBox<Teacher> filterTeacherCombo;
+
+    @FXML
+    private ComboBox<Subject> filterSubjCombo;
+
+    @FXML
+    private ComboBox<Group> filterGroupCombo;
+
+    @FXML
+    private DatePicker filterStartDate;
+
+    @FXML
+    private DatePicker filterEndDate;
+
+    @FXML
+    private TextField filterAverageTf;
+
+    @FXML
+    private Button filterCalcBut;
+
+    private String selectedFilter;
+
+    public void filterSelected() {
+        selectedFilter = filterCombo.getValue();
+        switch (selectedFilter) {
+            case "Студенты":
+                filterStudCombo.setDisable(false);
+                break;
+            case "Преподаватели":
+                filterTeacherCombo.setDisable(false);
+                break;
+            case "Предметы":
+                filterSubjCombo.setDisable(false);
+                break;
+            case "Группы":
+                filterGroupCombo.setDisable(false);
+                break;
+            default:
+                break;
+        }
+    }
+    
+    public void calculatePerformance() {
+        LocalDate start = filterStartDate.getValue();
+        LocalDate end = filterEndDate.getValue();
+        if (start != null && end != null && start.getYear() <= end.getYear()) {
+            String averageMark;
+            switch (selectedFilter) {
+                case "Студенты":
+                    averageMark = averageMarkService.calcPerfStud(start.toString(), end.toString(),
+                                                                filterStudCombo.getValue().getId());
+                    break;
+                case "Преподаватели":
+                    averageMark = averageMarkService.calcPerfTeach(start.toString(), end.toString(),
+                                                                filterTeacherCombo.getValue().getId());
+                    break;
+                case "Предметы":
+                    averageMark = averageMarkService.calcPerfSubj(start.toString(), end.toString(),
+                                                                filterSubjCombo.getValue().getName());
+                    break;
+                case "Группы":
+                    averageMark = averageMarkService.calcPerfGroup(start.toString(), end.toString(),
+                                                                filterGroupCombo.getValue().getName());
+                    break;
+                default:
+                    averageMark = "";
+                    break;
+            }
+            filterAverageTf.setText(averageMark);
+        }
+        disableComboBoxes();
+    }
+
+    private void disableComboBoxes() {
+        filterStudCombo.setDisable(true);
+        filterTeacherCombo.setDisable(true);
+        filterSubjCombo.setDisable(true);
+        filterGroupCombo.setDisable(true);
+        filterCalcBut.setDisable(true);
     }
 }

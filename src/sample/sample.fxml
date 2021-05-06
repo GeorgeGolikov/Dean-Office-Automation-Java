@@ -118,15 +118,19 @@
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab text="АНАЛИЗ">
+            <Tab fx:id="tabAverage" text="АНАЛИЗ">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ComboBox layoutX="80.0" layoutY="60.0" prefWidth="150.0" promptText="Фильтр" />
-                        <Button layoutX="76.0" layoutY="266.0" mnemonicParsing="false" text="Найти" />
-                        <TextField layoutX="76.0" layoutY="128.0" prefHeight="106.0" prefWidth="159.0" promptText="Средний балл" />
-                        <DatePicker layoutX="249.0" layoutY="60.0" prefHeight="25.0" prefWidth="138.0" promptText="начало периода" />
-                        <DatePicker layoutX="417.0" layoutY="60.0" prefHeight="25.0" prefWidth="138.0" promptText="конец периода" />
+                        <ComboBox fx:id="filterCombo" layoutX="70.0" layoutY="60.0" onAction="#filterSelected" prefWidth="150.0" promptText="Фильтр" />
+                        <Button fx:id="filterCalcBut" disable="true" layoutX="70.0" layoutY="324.0" mnemonicParsing="false" onAction="#calculatePerformance" text="Найти" />
+                        <TextField fx:id="filterAverageTf" editable="false" layoutX="70.0" layoutY="198.0" prefHeight="106.0" prefWidth="159.0" promptText="Средний балл" />
+                        <DatePicker fx:id="filterStartDate" layoutX="70.0" layoutY="97.0" prefHeight="25.0" prefWidth="138.0" promptText="начало периода" />
+                        <DatePicker fx:id="filterEndDate" layoutX="70.0" layoutY="136.0" prefHeight="25.0" prefWidth="138.0" promptText="конец периода" />
+                        <ComboBox fx:id="filterStudCombo" disable="true" layoutX="254.0" layoutY="60.0" prefWidth="150.0" promptText="Студенты" />
+                        <ComboBox fx:id="filterTeacherCombo" disable="true" layoutX="412.0" layoutY="60.0" prefWidth="150.0" promptText="Преподаватели" />
+                        <ComboBox fx:id="filterSubjCombo" disable="true" layoutX="573.0" layoutY="60.0" prefWidth="150.0" promptText="Предметы" />
+                        <ComboBox fx:id="filterGroupCombo" disable="true" layoutX="737.0" layoutY="60.0" prefWidth="150.0" promptText="Группы" />
                      </children>
                   </AnchorPane>
               </content>
