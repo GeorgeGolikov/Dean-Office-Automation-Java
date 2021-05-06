@@ -10,6 +10,12 @@ public final class Teacher {
 
     }
 
+    public Teacher(String firstName, String lastName, String fatherName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fatherName = fatherName;
+    }
+
     public Teacher(Integer id, String firstName, String lastName, String fatherName) {
         this.id = id;
         this.firstName = firstName;

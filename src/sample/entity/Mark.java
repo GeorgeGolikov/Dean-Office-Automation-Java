@@ -8,7 +8,6 @@ public final class Mark {
     private Integer value;
 
     private Integer studentId;
-    private Integer subjectId;
     private Integer teacherId;
 
     public Mark() {
@@ -23,9 +22,9 @@ public final class Mark {
         this.value = value;
     }
 
-    public Mark(Integer studentId, Integer subjectId, Integer teacherId, Integer value) {
+    public Mark(Integer studentId, String subjectName, Integer teacherId, Integer value) {
         this.studentId = studentId;
-        this.subjectId = subjectId;
+        this.subjectName = subjectName;
         this.teacherId = teacherId;
         this.value = value;
     }
@@ -76,14 +75,6 @@ public final class Mark {
 
     public void setStudentId(Integer studentId) {
         this.studentId = studentId;
-    }
-
-    public Integer getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(Integer subjectId) {
-        this.subjectId = subjectId;
     }
 
     public Integer getTeacherId() {

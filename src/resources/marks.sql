@@ -9,14 +9,14 @@ BEGIN
         WHERE P.ID = student_idd;
 END;
 
-CREATE OR REPLACE PROCEDURE add_marks (student_idd NUMBER, subject_idd NUMBER,
+CREATE OR REPLACE PROCEDURE add_marks (student_idd NUMBER, subject_name VARCHAR2,
                                     teacher_idd NUMBER, val NUMBER)
     IS
 BEGIN
     INSERT INTO MARKS
         (STUDENT_ID, SUBJECT_ID, TEACHER_ID, VALUE)
     VALUES
-        (student_idd, subject_idd, teacher_idd, val);
+        (student_idd, (SELECT ID FROM SUBJECTS WHERE name = subject_name), teacher_idd, val);
 END;
 
 CREATE OR REPLACE PROCEDURE del_marks (mark_id NUMBER)
@@ -25,13 +25,13 @@ BEGIN
     DELETE FROM MARKS WHERE ID = mark_id;
 END;
 
-CREATE OR REPLACE PROCEDURE upd_marks (mark_id NUMBER, student_idd NUMBER, subject_idd NUMBER,
+CREATE OR REPLACE PROCEDURE upd_marks (mark_id NUMBER, student_idd NUMBER, subject_name VARCHAR2,
                                     teacher_idd NUMBER, val NUMBER)
     IS
 BEGIN
     UPDATE MARKS SET
                      STUDENT_ID = student_idd,
-                     SUBJECT_ID = subject_idd,
+                     SUBJECT_ID = (SELECT ID FROM SUBJECTS WHERE name = subject_name),
                      TEACHER_ID = teacher_idd,
                      VALUE = val
     WHERE ID = mark_id;

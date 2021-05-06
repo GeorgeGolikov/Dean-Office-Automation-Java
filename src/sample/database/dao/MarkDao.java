@@ -51,7 +51,7 @@ public class MarkDao extends DAO<Mark> {
     public void save(Mark mark) {
         try (CallableStatement cstmt = conn.prepareCall("{call add_marks(?,?,?,?)}")) {
             cstmt.setInt(1, mark.getStudentId());
-            cstmt.setInt(2, mark.getSubjectId());
+            cstmt.setString(2, mark.getSubjectName());
             cstmt.setInt(3, mark.getTeacherId());
             cstmt.setInt(4, mark.getValue());
             cstmt.executeQuery();
@@ -75,7 +75,7 @@ public class MarkDao extends DAO<Mark> {
         try (CallableStatement cstmt = conn.prepareCall("{call upd_marks(?,?,?,?,?)}")) {
             cstmt.setInt(1, _old.getId());
             cstmt.setInt(2, _new.getStudentId());
-            cstmt.setInt(3, _new.getSubjectId());
+            cstmt.setString(3, _new.getSubjectName());
             cstmt.setInt(4, _new.getTeacherId());
             cstmt.setInt(5, _new.getValue());
             cstmt.executeQuery();

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -30,7 +32,7 @@
                             <TableColumn fx:id="tableGroupsColumn" prefWidth="904.0" text="Группа" />
                           </columns>
                         </TableView>
-                        <TextField fx:id="addGroupTf" layoutX="10.0" layoutY="351.0" AnchorPane.leftAnchor="10.0" />
+                        <TextField fx:id="addGroupTf" layoutX="10.0" layoutY="351.0" promptText="Группа" AnchorPane.leftAnchor="10.0" />
                         <Button fx:id="addGroupBut" layoutX="172.0" layoutY="351.0" mnemonicParsing="false" onAction="#addGroup" text="Добавить" />
                         <Button fx:id="deleteGroupBut" layoutX="251.0" layoutY="351.0" mnemonicParsing="false" onAction="#delGroup" text="Удалить" />
                      </children>
@@ -39,9 +41,96 @@
           </Tab>
           <Tab text="Студенты">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView editable="true" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                          <columns>
+                            <TableColumn prefWidth="168.0" text="Фамилия" />
+                            <TableColumn prefWidth="147.0" text="Имя" />
+                              <TableColumn prefWidth="148.0" text="Отчество" />
+                              <TableColumn prefWidth="153.0" text="Группа" />
+                          </columns>
+                        </TableView>
+                        <TextField layoutX="10.0" layoutY="419.0" promptText="Фамилия" />
+                        <TextField layoutX="177.0" layoutY="419.0" promptText="Имя" />
+                        <TextField layoutX="340.0" layoutY="419.0" promptText="Отчество" />
+                        <TextField layoutX="500.0" layoutY="419.0" promptText="Группа" />
+                        <Button layoutX="665.0" layoutY="419.0" mnemonicParsing="false" text="Добавить" />
+                        <Button layoutX="752.0" layoutY="419.0" mnemonicParsing="false" text="Удалить" />
+                     </children></AnchorPane>
             </content>
           </Tab>
+            <Tab text="Преподаватели">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView editable="true" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <columns>
+                              <TableColumn prefWidth="168.0" text="Фамилия" />
+                              <TableColumn prefWidth="147.0" text="Имя" />
+                              <TableColumn prefWidth="148.0" text="Отчество" />
+                           </columns>
+                        </TableView>
+                        <TextField layoutX="10.0" layoutY="419.0" promptText="Фамилия" />
+                        <TextField layoutX="177.0" layoutY="419.0" promptText="Имя" />
+                        <TextField layoutX="340.0" layoutY="419.0" promptText="Отчество" />
+                        <Button layoutX="506.0" layoutY="419.0" mnemonicParsing="false" text="Добавить" />
+                        <Button layoutX="593.0" layoutY="419.0" mnemonicParsing="false" text="Удалить" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabGroups1" onSelectionChanged="#loadGroups" text="Предметы">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="602.0" prefWidth="891.0">
+                     <children>
+                        <TableView fx:id="tableGroups1" editable="true" layoutX="14.0" layoutY="14.0" prefHeight="286.0" prefWidth="354.0" AnchorPane.bottomAnchor="272.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                           <columns>
+                              <TableColumn fx:id="tableGroupsColumn1" prefWidth="904.0" text="Предмет" />
+                           </columns>
+                        </TableView>
+                        <TextField fx:id="addGroupTf1" layoutX="10.0" layoutY="351.0" promptText="Предмет" AnchorPane.leftAnchor="10.0" />
+                        <Button fx:id="addGroupBut1" layoutX="172.0" layoutY="351.0" mnemonicParsing="false" onAction="#addGroup" text="Добавить" />
+                        <Button fx:id="deleteGroupBut1" layoutX="251.0" layoutY="351.0" mnemonicParsing="false" onAction="#delGroup" text="Удалить" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Оценки">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ComboBox layoutX="10.0" layoutY="14.0" prefWidth="150.0" promptText="Студент" />
+                        <TableView editable="true" layoutX="14.0" layoutY="51.0" prefHeight="324.0" prefWidth="648.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+                          <columns>
+                            <TableColumn editable="false" prefWidth="179.0" text="Предмет" />
+                            <TableColumn editable="false" prefWidth="135.0" text="Преп.Имя" />
+                              <TableColumn editable="false" prefWidth="155.0" text="Преп.Фамилия" />
+                              <TableColumn prefWidth="200.0" text="Оценка" />
+                          </columns>
+                        </TableView>
+                        <ComboBox layoutX="10.0" layoutY="421.0" prefWidth="150.0" promptText="Предмет" />
+                        <ComboBox layoutX="170.0" layoutY="421.0" prefWidth="150.0" promptText="Преподаватель" />
+                        <ComboBox layoutX="336.0" layoutY="421.0" prefWidth="150.0" promptText="Оценка" />
+                        <Button layoutX="515.0" layoutY="421.0" mnemonicParsing="false" text="Добавить" />
+                        <Button layoutX="593.0" layoutY="421.0" mnemonicParsing="false" text="Удалить" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="АНАЛИЗ">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ComboBox layoutX="80.0" layoutY="60.0" prefWidth="150.0" promptText="Фильтр" />
+                        <Button layoutX="76.0" layoutY="266.0" mnemonicParsing="false" text="Найти" />
+                        <TextField layoutX="76.0" layoutY="128.0" prefHeight="106.0" prefWidth="159.0" promptText="Средний балл" />
+                        <DatePicker layoutX="249.0" layoutY="60.0" prefHeight="25.0" prefWidth="138.0" promptText="начало периода" />
+                        <DatePicker layoutX="417.0" layoutY="60.0" prefHeight="25.0" prefWidth="138.0" promptText="конец периода" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>

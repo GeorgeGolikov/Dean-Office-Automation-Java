@@ -11,6 +11,13 @@ public final class Student {
 
     }
 
+    public Student(String firstName, String lastName, String fatherName, String groupName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fatherName = fatherName;
+        this.groupName = groupName;
+    }
+
     public Student(Integer id, String firstName, String lastName, String fatherName, String groupName) {
         this.id = id;
         this.firstName = firstName;

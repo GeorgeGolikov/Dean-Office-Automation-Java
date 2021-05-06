@@ -7,11 +7,21 @@ END;
 
 CREATE OR REPLACE PROCEDURE add_subjects (subject_name VARCHAR2)
     IS
+        subjectIdCount NUMBER;
 BEGIN
-    INSERT INTO SUBJECTS
-        (name)
-    VALUES
-        (subject_name);
+    COMMIT;
+    SELECT COUNT(ID) INTO subjectIdCount FROM SUBJECTS WHERE name = subject_name;
+
+    IF (subjectIdCount = 0)
+    THEN
+        INSERT INTO SUBJECTS
+            (name)
+        VALUES
+            (subject_name);
+        COMMIT;
+    ELSE
+        ROLLBACK;
+    END IF;
 END;
 
 CREATE OR REPLACE PROCEDURE del_subjects (subject_name VARCHAR2)
