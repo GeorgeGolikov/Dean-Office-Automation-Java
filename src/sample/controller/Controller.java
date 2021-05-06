@@ -106,6 +106,7 @@ public class Controller {
             groupService.delete(group);
         }
         loadGroups();
+        loadMarksComboBoxes();
     }
 
     public void editGroup(Group group, String newGroupName) {
@@ -214,6 +215,7 @@ public class Controller {
 
         studentService.add(new Student(name, lastName, fatherName, group));
         loadStudents();
+        loadMarksComboBoxes();
     }
 
     public void delStudent() {
@@ -222,6 +224,7 @@ public class Controller {
             studentService.delete(student);
         }
         loadStudents();
+        loadMarksComboBoxes();
     }
 
     public void editStudent(Student student, String lastName, String name,
@@ -234,6 +237,8 @@ public class Controller {
         student.setFirstName(name);
         student.setFatherName(fatherName);
         student.setGroupName(group);
+
+        loadMarksComboBoxes();
     }
 
     /*
@@ -315,6 +320,7 @@ public class Controller {
 
         teacherService.add(new Teacher(name, lastName, fatherName));
         loadTeachers();
+        loadMarksComboBoxes();
     }
 
     public void delTeacher() {
@@ -323,6 +329,7 @@ public class Controller {
             teacherService.delete(teacher);
         }
         loadTeachers();
+        loadMarksComboBoxes();
     }
 
     public void editTeacher(Teacher teacher, String lastName, String name, String fatherName) {
@@ -332,6 +339,8 @@ public class Controller {
         teacher.setLastName(lastName);
         teacher.setFirstName(name);
         teacher.setFatherName(fatherName);
+
+        loadMarksComboBoxes();
     }
 
     /*
@@ -380,6 +389,7 @@ public class Controller {
 
         subjectService.add(new Subject(name));
         loadSubjects();
+        loadMarksComboBoxes();
     }
 
     public void delSubject() {
@@ -388,6 +398,7 @@ public class Controller {
             subjectService.delete(subject);
         }
         loadSubjects();
+        loadMarksComboBoxes();
     }
 
     public void editSubject(Subject subject, String newSubjectName) {
@@ -395,6 +406,8 @@ public class Controller {
 
         subjectService.update(subject, new Subject(newSubjectName));
         subject.setName(newSubjectName);
+
+        loadMarksComboBoxes();
     }
 
     /*
@@ -420,10 +433,14 @@ public class Controller {
             editMark(e.getTableView().getItems().get(e.getTablePosition().getRow()), newVal);
         });
 
+        loadMarksComboBoxes();
+        marksValueCombo.setItems(FXCollections.observableArrayList(2, 3, 4, 5));
+    }
+
+    private void loadMarksComboBoxes() {
         marksStudentsCombo.setItems(students);
         marksSubjectsCombo.setItems(subjects);
         marksTeachersCombo.setItems(teachers);
-        marksValueCombo.setItems(FXCollections.observableArrayList(2, 3, 4, 5));
     }
 
     private ObservableList<Mark> marks = FXCollections.observableArrayList();
