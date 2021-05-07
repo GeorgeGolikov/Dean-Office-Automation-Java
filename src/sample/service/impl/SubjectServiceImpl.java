@@ -6,6 +6,8 @@ import sample.database.dao.SubjectDao;
 import sample.entity.Subject;
 import sample.service.SubjectService;
 
+import java.util.List;
+
 public class SubjectServiceImpl implements SubjectService {
     private DAO dao;
 
@@ -31,5 +33,10 @@ public class SubjectServiceImpl implements SubjectService {
     @Override
     public void update(Subject _old, Subject _new) {
         dao.update(_old, _new);
+    }
+
+    @Override
+    public List<Integer> countDependencies(Subject subject) {
+        return dao.countDependencies(subject);
     }
 }

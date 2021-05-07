@@ -6,6 +6,8 @@ import sample.database.dao.GroupsDao;
 import sample.entity.Group;
 import sample.service.GroupService;
 
+import java.util.List;
+
 public class GroupServiceImpl implements GroupService {
     private DAO dao;
 
@@ -31,5 +33,10 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public void update(Group _old, Group _new) {
         dao.update(_old, _new);
+    }
+
+    @Override
+    public List<Integer> countDependencies(Group group) {
+        return dao.countDependencies(group);
     }
 }

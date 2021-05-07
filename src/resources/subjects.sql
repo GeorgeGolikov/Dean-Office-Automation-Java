@@ -33,6 +33,15 @@ BEGIN
     commit;
 END;
 
+CREATE OR REPLACE PROCEDURE count_subj_dependencies (subject_name VARCHAR2, count_cursor OUT SYS_REFCURSOR)
+    IS
+BEGIN
+    open count_cursor for
+        SELECT COUNT(M.ID) FROM SUBJECTS
+        JOIN MARKS M on SUBJECTS.ID = M.SUBJECT_ID
+        WHERE SUBJECTS.NAME = subject_name;
+END;
+
 CREATE OR REPLACE PROCEDURE upd_subjects (old_subject_name VARCHAR2, new_subject_name VARCHAR2)
     IS
 BEGIN

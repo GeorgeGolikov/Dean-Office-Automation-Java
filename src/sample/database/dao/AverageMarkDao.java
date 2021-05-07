@@ -7,6 +7,7 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 public class AverageMarkDao extends DAO<Double> {
     public AverageMarkDao() throws SQLException {
@@ -98,5 +99,10 @@ public class AverageMarkDao extends DAO<Double> {
     @Override
     public void update(Double _old, Double _new) {
 
+    }
+
+    @Override
+    public List<Integer> countDependencies(Double aDouble) {
+        return null;
     }
 }

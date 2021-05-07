@@ -37,6 +37,16 @@ BEGIN
     commit;
 END;
 
+CREATE OR REPLACE PROCEDURE count_group_dependencies (group_name VARCHAR2, count_cursor OUT SYS_REFCURSOR)
+    IS
+BEGIN
+    open count_cursor for
+        SELECT COUNT(P.ID), COUNT(M.ID) FROM GROUPS
+        JOIN PEOPLE P on GROUPS.ID = P.GROUP_ID
+        JOIN MARKS M on P.ID = M.STUDENT_ID
+        WHERE GROUPS.NAME = group_name;
+END;
+
 CREATE OR REPLACE PROCEDURE upd_groups (old_group_name VARCHAR2, new_group_name VARCHAR2)
     IS
 BEGIN

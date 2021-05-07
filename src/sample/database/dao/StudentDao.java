@@ -9,6 +9,8 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentDao extends DAO<Student> {
     public StudentDao() throws SQLException {
@@ -23,7 +25,7 @@ public class StudentDao extends DAO<Student> {
 
             try (ResultSet rs = cstmt.getObject(1, ResultSet.class)) {
                 ObservableList<Student> res = FXCollections.observableArrayList();
-                while(rs.next()) {
+                while (rs.next()) {
                     res.add(new Student(
                                 rs.getInt(1),
                                 rs.getString(2),
@@ -75,6 +77,20 @@ public class StudentDao extends DAO<Student> {
             cstmt.executeQuery();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Integer> countDependencies(Student student) {
+        try (CallableStatement cstmt = conn.prepareCall("{call count_stud_dependencies(?,?)}")) {
+            cstmt.setInt(1, student.getId());
+            cstmt.registerOutParameter(2, Types.REF_CURSOR);
+            cstmt.executeQuery();
+
+            return getCount(cstmt);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 }
