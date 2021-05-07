@@ -14,11 +14,6 @@ public class WarningController {
     }
 
     @FXML
-    private void destruction() {
-
-    }
-
-    @FXML
     private Label label;
 
     @FXML
