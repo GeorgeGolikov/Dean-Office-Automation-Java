@@ -6,6 +6,8 @@ import sample.database.dao.StudentDao;
 import sample.entity.Student;
 import sample.service.StudentService;
 
+import java.util.List;
+
 public class StudentServiceImpl implements StudentService {
     private DAO dao;
 
@@ -31,5 +33,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void update(Student _old, Student _new) {
         dao.update(_old, _new);
+    }
+
+    @Override
+    public List<Integer> countDependencies(Student student) {
+        return dao.countDependencies(student);
     }
 }

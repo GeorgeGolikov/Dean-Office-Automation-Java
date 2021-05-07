@@ -25,6 +25,15 @@ BEGIN
     commit;
 END;
 
+CREATE OR REPLACE PROCEDURE count_teach_dependencies (teacherID NUMBER, count_cursor OUT SYS_REFCURSOR)
+    IS
+BEGIN
+    open count_cursor for
+        SELECT COUNT(M.ID) FROM PEOPLE
+        JOIN MARKS M on PEOPLE.ID = M.TEACHER_ID
+        WHERE PEOPLE.ID = teacherID;
+END;
+
 CREATE OR REPLACE PROCEDURE upd_teachers (teacher_id NUMBER, first_namee VARCHAR2,
                                         last_namee VARCHAR2, father_namee VARCHAR2)
     IS

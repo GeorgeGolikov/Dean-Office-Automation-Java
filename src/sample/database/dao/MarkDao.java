@@ -10,6 +10,7 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 public class MarkDao extends DAO<Mark> {
     public MarkDao() throws SQLException {
@@ -79,5 +80,10 @@ public class MarkDao extends DAO<Mark> {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public List<Integer> countDependencies(Mark mark) {
+        return null;
     }
 }

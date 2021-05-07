@@ -9,6 +9,8 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupsDao extends DAO<Group> {
     public GroupsDao() throws SQLException {
@@ -62,6 +64,28 @@ public class GroupsDao extends DAO<Group> {
             cstmt.executeQuery();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Integer> countDependencies(Group group) {
+        try (CallableStatement cstmt = conn.prepareCall("{call count_group_dependencies(?,?)}")) {
+            cstmt.setString(1, group.getName());
+            cstmt.registerOutParameter(2, Types.REF_CURSOR);
+            cstmt.executeQuery();
+
+            try (ResultSet rs = cstmt.getObject(2, ResultSet.class)) {
+                List<Integer> res = new ArrayList<>();
+                if (rs.next()) {
+                    res.add(rs.getInt(1));
+                    res.add(rs.getInt(2));
+                } else
+                    res = null;
+                return res;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 }

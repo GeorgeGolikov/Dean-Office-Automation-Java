@@ -9,6 +9,8 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SubjectDao extends DAO<Subject> {
     public SubjectDao() throws SQLException {
@@ -62,6 +64,20 @@ public class SubjectDao extends DAO<Subject> {
             cstmt.executeQuery();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<Integer> countDependencies(Subject subject) {
+        try (CallableStatement cstmt = conn.prepareCall("{call count_subj_dependencies(?,?)}")) {
+            cstmt.setString(1, subject.getName());
+            cstmt.registerOutParameter(2, Types.REF_CURSOR);
+            cstmt.executeQuery();
+
+            return getCount(cstmt);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 }

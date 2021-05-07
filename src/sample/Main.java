@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent authRoot = FXMLLoader.load(getClass().getResource("auth.fxml"));
+        Parent authRoot = FXMLLoader.load(getClass().getResource("gui/auth.fxml"));
         primaryStage.setTitle("Деканат");
         primaryStage.setScene(new Scene(authRoot, 600, 400));
         primaryStage.show();

@@ -3,10 +3,14 @@ package sample.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import javafx.util.converter.DefaultStringConverter;
 import sample.database.dao.*;
 import sample.entity.*;
@@ -15,6 +19,7 @@ import sample.service.impl.*;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Controller {
     private static GroupService groupService;
@@ -105,15 +110,24 @@ public class Controller {
         loadAverageComboBoxes();
     }
 
+    private Group groupToDelete = null;
     public void delGroup() {
-        Group group = tableGroups.getSelectionModel().getSelectedItem();
-        if (group != null) {
-            groupService.delete(group);
+        groupToDelete = tableGroups.getSelectionModel().getSelectedItem();
+        if (groupToDelete != null) {
+            List<Integer> countDependencies = groupService.countDependencies(groupToDelete);
+            if (countDependencies != null) {
+                Integer count1 = countDependencies.get(0);
+                Integer count2 = countDependencies.get(1);
+                if (count1 > 0 || count2 > 0) {
+                    // push warning
+                    String text = String.format("Эта группа содержит %d студентов, которые имеют %d оценок." +
+                            "Вы действительно хотите продолжить и удалить всё вместе ?", count1, count2);
+                    pushWarning(text);
+                    return;
+                }
+            }
+            reallyDelete(true);
         }
-        loadGroups();
-        
-        loadMarksComboBoxes();
-        loadAverageComboBoxes();
     }
 
     public void editGroup(Group group, String newGroupName) {
@@ -229,15 +243,23 @@ public class Controller {
         loadAverageComboBoxes();
     }
 
+    private Student studentToDelete = null;
     public void delStudent() {
-        Student student = tableStudents.getSelectionModel().getSelectedItem();
-        if (student != null) {
-            studentService.delete(student);
+        studentToDelete = tableStudents.getSelectionModel().getSelectedItem();
+        if (studentToDelete != null) {
+            List<Integer> countDependencies = studentService.countDependencies(studentToDelete);
+            if (countDependencies != null) {
+                Integer count1 = countDependencies.get(0);
+                if (count1 > 0) {
+                    // push warning
+                    String text = String.format("Этот студент имеет %d оценок." +
+                            "Вы действительно хотите продолжить и удалить всё вместе ?", count1);
+                    pushWarning(text);
+                    return;
+                }
+            }
+            reallyDelete(true);
         }
-        loadStudents();
-        
-        loadMarksComboBoxes();
-        loadAverageComboBoxes();
     }
 
     public void editStudent(Student student, String lastName, String name,
@@ -339,15 +361,22 @@ public class Controller {
         loadAverageComboBoxes();
     }
 
+    private Teacher teacherToDelete = null;
     public void delTeacher() {
-        Teacher teacher = tableTeachers.getSelectionModel().getSelectedItem();
-        if (teacher != null) {
-            teacherService.delete(teacher);
+        teacherToDelete = tableTeachers.getSelectionModel().getSelectedItem();
+        if (teacherToDelete != null) {
+            List<Integer> countDependencies = teacherService.countDependencies(teacherToDelete);
+            if (countDependencies != null) {
+                Integer count1 = countDependencies.get(0);
+                if (count1 > 0) {
+                    // push warning
+                    String text = String.format("Этот преподаватель провел %d экзаменов." +
+                            "Вы действительно хотите продолжить и удалить всё вместе ?", count1);
+                    pushWarning(text);
+                }
+            }
+            reallyDelete(true);
         }
-        loadTeachers();
-        
-        loadMarksComboBoxes();
-        loadAverageComboBoxes();
     }
 
     public void editTeacher(Teacher teacher, String lastName, String name, String fatherName) {
@@ -413,15 +442,22 @@ public class Controller {
         loadAverageComboBoxes();
     }
 
+    private Subject subjectToDelete = null;
     public void delSubject() {
-        Subject subject = tableSubjects.getSelectionModel().getSelectedItem();
-        if (subject != null) {
-            subjectService.delete(subject);
+        subjectToDelete = tableSubjects.getSelectionModel().getSelectedItem();
+        if (subjectToDelete != null) {
+            List<Integer> countDependencies = subjectService.countDependencies(subjectToDelete);
+            if (countDependencies != null) {
+                Integer count1 = countDependencies.get(0);
+                if (count1 > 0) {
+                    // push warning
+                    String text = String.format("Этот предмет содержится в %d оценках." +
+                            "Вы действительно хотите продолжить и удалить всё вместе ?", count1);
+                    pushWarning(text);
+                }
+            }
+            reallyDelete(true);
         }
-        loadSubjects();
-        
-        loadMarksComboBoxes();
-        loadAverageComboBoxes();
     }
 
     public void editSubject(Subject subject, String newSubjectName) {
@@ -662,5 +698,78 @@ public class Controller {
         filterSubjCombo.setDisable(true);
         filterGroupCombo.setDisable(true);
         filterCalcBut.setDisable(true);
+    }
+
+    /*
+        -------------------------------------------- ПРЕДУПРЕЖДЕНИЕ --------------------------------------------
+    */
+    private void pushWarning(String text) {
+        try {
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../gui/warning.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Warning");
+            Scene scene = new Scene(root, 330, 200);
+            stage.setScene(scene);
+            WarningController controller = loader.getController();
+            controller.setMainController(this);
+            controller.setLabelText(text);
+            stage.show();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            System.out.println("Problems loading the warning");
+        }
+    }
+
+    public void reallyDelete(boolean really) {
+        if (really) {
+            if (groupToDelete != null) {
+                groupService.delete(groupToDelete);
+                groupToDelete = null;
+
+                loadGroups();
+
+                loadMarksComboBoxes();
+                loadAverageComboBoxes();
+                return;
+            }
+            if (studentToDelete != null) {
+                studentService.delete(studentToDelete);
+                studentToDelete = null;
+
+                loadStudents();
+
+                loadMarksComboBoxes();
+                loadAverageComboBoxes();
+                return;
+            }
+            if (teacherToDelete != null) {
+                teacherService.delete(teacherToDelete);
+                teacherToDelete = null;
+
+                loadTeachers();
+
+                loadMarksComboBoxes();
+                loadAverageComboBoxes();
+                return;
+            }
+            if (subjectToDelete != null) {
+                subjectService.delete(subjectToDelete);
+                subjectToDelete = null;
+
+                loadSubjects();
+
+                loadMarksComboBoxes();
+                loadAverageComboBoxes();
+            }
+        } else {
+            groupToDelete = null;
+            studentToDelete = null;
+            teacherToDelete = null;
+            subjectToDelete = null;
+        }
     }
 }
