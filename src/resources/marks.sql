@@ -25,14 +25,10 @@ BEGIN
     DELETE FROM MARKS WHERE ID = mark_id;
 END;
 
-CREATE OR REPLACE PROCEDURE upd_marks (mark_id NUMBER, student_idd NUMBER, subject_name VARCHAR2,
-                                    teacher_idd NUMBER, val NUMBER)
+CREATE OR REPLACE PROCEDURE upd_marks (mark_id NUMBER, val NUMBER)
     IS
 BEGIN
     UPDATE MARKS SET
-                     STUDENT_ID = student_idd,
-                     SUBJECT_ID = (SELECT ID FROM SUBJECTS WHERE name = subject_name),
-                     TEACHER_ID = teacher_idd,
                      VALUE = val
     WHERE ID = mark_id;
     commit;

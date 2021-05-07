@@ -8,7 +8,6 @@ import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.DefaultStringConverter;
-import javafx.util.converter.IntegerStringConverter;
 import sample.database.dao.*;
 import sample.entity.*;
 import sample.service.*;
@@ -451,7 +450,7 @@ public class Controller {
         tableMarkTeacherNameColumn.setCellFactory(
                 TextFieldTableCell.forTableColumn(new DefaultStringConverter()));
         tableMarkValueColumn.setCellFactory(
-                ComboBoxTableCell.forTableColumn(new IntegerStringConverter()));
+                ComboBoxTableCell.forTableColumn(2, 3, 4, 5));
 
         tableMarkValueColumn.setOnEditCommit(e -> {
             Integer newVal = e.getNewValue();
@@ -534,10 +533,10 @@ public class Controller {
     }
 
     public void editMark(Mark mark, Integer newValue) {
-        if (mark == null || newValue == null) return;
+        Student student = marksStudentsCombo.getValue();
+        if (mark == null || newValue == null || student == null) return;
 
-        markService.update(mark, new Mark(mark.getStudentId(), mark.getSubjectName(),
-                mark.getTeacherId(), newValue));
+        markService.update(mark, new Mark(newValue));
         mark.setValue(newValue);
     }
 
@@ -599,15 +598,27 @@ public class Controller {
         switch (selectedFilter) {
             case "Студенты":
                 filterStudCombo.setDisable(false);
+                filterTeacherCombo.setDisable(true);
+                filterSubjCombo.setDisable(true);
+                filterGroupCombo.setDisable(true);
                 break;
             case "Преподаватели":
                 filterTeacherCombo.setDisable(false);
+                filterStudCombo.setDisable(true);
+                filterSubjCombo.setDisable(true);
+                filterGroupCombo.setDisable(true);
                 break;
             case "Предметы":
                 filterSubjCombo.setDisable(false);
+                filterStudCombo.setDisable(true);
+                filterTeacherCombo.setDisable(true);
+                filterGroupCombo.setDisable(true);
                 break;
             case "Группы":
                 filterGroupCombo.setDisable(false);
+                filterStudCombo.setDisable(true);
+                filterTeacherCombo.setDisable(true);
+                filterSubjCombo.setDisable(true);
                 break;
             default:
                 break;

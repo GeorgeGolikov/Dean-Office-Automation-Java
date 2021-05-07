@@ -14,6 +14,10 @@ public final class Mark {
 
     }
 
+    public Mark(Integer value) {
+        this.value = value;
+    }
+
     public Mark(Integer id, String subjectName, String teacherName, String teacherLastName, Integer value) {
         this.id = id;
         this.subjectName = subjectName;

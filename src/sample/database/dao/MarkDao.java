@@ -72,12 +72,9 @@ public class MarkDao extends DAO<Mark> {
 
     @Override
     public void update(Mark _old, Mark _new) {
-        try (CallableStatement cstmt = conn.prepareCall("{call upd_marks(?,?,?,?,?)}")) {
+        try (CallableStatement cstmt = conn.prepareCall("{call upd_marks(?,?)}")) {
             cstmt.setInt(1, _old.getId());
-            cstmt.setInt(2, _new.getStudentId());
-            cstmt.setString(3, _new.getSubjectName());
-            cstmt.setInt(4, _new.getTeacherId());
-            cstmt.setInt(5, _new.getValue());
+            cstmt.setInt(2, _new.getValue());
             cstmt.executeQuery();
         } catch (SQLException e) {
             System.out.println(e.getMessage());

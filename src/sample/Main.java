@@ -9,10 +9,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+    public void start(Stage primaryStage) throws Exception {
+        Parent authRoot = FXMLLoader.load(getClass().getResource("auth.fxml"));
         primaryStage.setTitle("Деканат");
-        primaryStage.setScene(new Scene(root, 1200, 800));
+        primaryStage.setScene(new Scene(authRoot, 600, 400));
         primaryStage.show();
     }
 
