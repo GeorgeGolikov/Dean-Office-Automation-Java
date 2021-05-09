@@ -373,6 +373,7 @@ public class Controller {
                     String text = String.format("Этот преподаватель провел %d экзаменов." +
                             "Вы действительно хотите продолжить и удалить всё вместе ?", count1);
                     pushWarning(text);
+                    return;
                 }
             }
             reallyDelete(true);
@@ -454,6 +455,7 @@ public class Controller {
                     String text = String.format("Этот предмет содержится в %d оценках." +
                             "Вы действительно хотите продолжить и удалить всё вместе ?", count1);
                     pushWarning(text);
+                    return;
                 }
             }
             reallyDelete(true);
